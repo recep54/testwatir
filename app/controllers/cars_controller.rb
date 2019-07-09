@@ -11,11 +11,9 @@ class CarsController < ApplicationController
   # GET /cars/1.json
   def show
     require 'watir'
-    
 
-    
-  @browser = Watir::Browser.new(:firefox)
-  @browser.goto"http://encheres.clubimport.fr/auctions/?p=project/lot&id=550986806&s"
+    @browser = Watir::Browser.new :chrome, headless: true
+    @browser.goto"http://encheres.clubimport.fr/auctions/?p=project/lot&id=550986806&s"
   
   end
 
