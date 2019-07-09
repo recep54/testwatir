@@ -12,10 +12,21 @@ class CarsController < ApplicationController
   def show
     require 'watir'
 
+    if Rails.env.production?
     @browser = Watir::Browser.new :chrome, headless: true
     @browser.goto"http://encheres.clubimport.fr/auctions/?p=project/lot&id=550986806&s"
-  
+    @titre = @browser.h1.text
+    @browser.close
+    else
+      puts "hello"
+      @browser = Watir::Browser.new :firefox
+    @browser.goto"http://encheres.clubimport.fr/auctions/?p=project/lot&id=550986806&s"
+    @titre = @browser.h1.text
+    @browser.close
+    end 
   end
+  
+  
 
   # GET /cars/new
   def new
